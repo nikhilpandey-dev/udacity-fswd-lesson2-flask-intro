@@ -1,5 +1,7 @@
 from configparser import ConfigParser
 from typing import List, Dict, Tuple
+
+
 def config(filename="database.ini", section="postgresql"):
     # Create Parser
     parser = ConfigParser()
