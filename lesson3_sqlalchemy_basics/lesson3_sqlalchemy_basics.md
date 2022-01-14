@@ -178,3 +178,13 @@ def index():
 In this case, @app.route is a Python decorator. Decorator takes a function and returns another function, usually extending the input function with additional("decorated") functionality.
 @app.route is a decorator that takes an input function `index()` as the callback that gets invoked when a request to route `/` comes in from a client.
 
+## db.Model and Defining Models
+
+Given an instance of the SQLAlchemy class fron the Flask-SQLAlchemy
+
+```python
+db = SQLAlchemy(app)
+```
+- db is an interface for interfacing with our database.
+- `db.model` lets us create and manipulate **data models**.
+- `db.session` lets us create and manipulate **database transactions**.
