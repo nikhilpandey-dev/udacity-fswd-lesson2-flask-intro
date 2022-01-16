@@ -188,3 +188,30 @@ db = SQLAlchemy(app)
 - db is an interface for interfacing with our database.
 - `db.model` lets us create and manipulate **data models**.
 - `db.session` lets us create and manipulate **database transactions**.
+
+## Syncing Models, `db.create_all()`
+
+- SQLAlchemy names the table by the name of the class, all lower cased, by default. Then, if it finds a table with that name already, regardless of whether the schema matches the class, it will skip creating another table by that same name, and do nothing.
+
+## Experimenting in Interactive Mode
+
+## SQLAlchemy Data types
+![SQLAlchemy Data Types](./images/sqlalchemy_data_type.png)
+
+## SQLALchemy Constraints
+![SQLAlchemy Constraints](./images/sqlalchemy_constraints2.png)
+<br><br><br>
+
+# SQLAlchemy ORM in Depth
+
+## Introduction
+### Concepts to learned
+- Object Life Cycle
+- Session
+- Query Objects
+
+![SQLAlchemy WorkFlow](./images/sqlalchemy_workflow.png)
+<center>SQLAlchemy WorkFlow</center>
+
+## Model.query
+

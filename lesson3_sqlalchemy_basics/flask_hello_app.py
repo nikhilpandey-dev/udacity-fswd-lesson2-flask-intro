@@ -15,16 +15,20 @@ class Person(db.Model):
     id: int = db.Column(db.Integer, primary_key=True)
     name: str = db.Column(db.String(), nullable=False)
 
+    def __repr__(self):
+        return f"<Person ID: {self.id}, name: {self.name}>"
+
 
 db.create_all()
 
 
 @app.route("/")
 def index():
+    person = Person.query.first()
     return_str = """
-        <h1>Hello, World!</h1>
-      <p> So a multiline flask!</p>
-      """
+        <h1>Hello, World from {name}!</h1>
+      <p> So a multiline flask by {name}!</p>
+      """.format(name=person.name)
     return return_str
 
 

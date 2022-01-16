@@ -1,0 +1,8 @@
+@startuml seq_diagram_1
+
+HappyState -> SadState : Lost Money
+SadState --> HappyState : Received Money
+
+HappyState -> ExcitedState: Win a Lottery
+ExcitedState -->> ExcitedState: shall I donate?
+@enduml
