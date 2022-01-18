@@ -1,0 +1,4 @@
+@startuml mvc_flow_todo_app_flask
+(*) --> "On the view: implement an HTML form"
+
+@enduml
