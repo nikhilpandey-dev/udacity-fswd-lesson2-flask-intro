@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from helpers import sqlalchemy_config
 params = sqlalchemy_config(filename="./database.ini")
@@ -20,6 +20,18 @@ class Todo(db.Model):
         return f"<Todo {self.id}: {self.description}>"
 
 db.create_all()
+
+@app.post('/todos/create')
+def create_todo():
+    description = request.form.get('description', '')
+    todo = Todo(description=description.strip())
+    db.session.add(todo)
+    if ''.__eq__(description.strip()):
+        db.session.rollback()
+    else:
+        db.session.commit()
+    return redirect(url_for('index'))
+    
 
 @app.route('/')
 def index():
