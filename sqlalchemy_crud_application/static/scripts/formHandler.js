@@ -1,4 +1,4 @@
-alert("You refreshed the page!");
+alert("You refreshed the page after moving!");
 
 const descInput = document.getElementById('description');
 document.getElementById('form').onsubmit = function(e) {

@@ -33,7 +33,7 @@ def create_todo():
     try:
         description: str = request.get_json()['description'].strip()
         print(f"description is: {description}")
-        todo: Todo = Todo(description2=description)
+        todo: Todo = Todo(description=description)
         db.session.add(todo)
         if not description:
             db.session.delete(todo)

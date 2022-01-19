@@ -16,7 +16,7 @@
       crossorigin="anonymous"
     ></script>
     <link
-      href="{{url_for('static', filename = 'style.css')}}"
+      href="{{url_for('static', filename = './css/style.css')}}"
       rel="stylesheet"
     />
     <title>Todo App</title>
@@ -48,6 +48,6 @@
         {% endfor %}
       </ul>
     </div>
-    <script src="{{url_for('static', filename = 'script.js')}}"></script>
+    <script src="{{url_for('static', filename = './scripts/formHandler.js')}}"></script>
   </body>
 </html>
