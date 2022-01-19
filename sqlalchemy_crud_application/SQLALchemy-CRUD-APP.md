@@ -71,4 +71,9 @@ There are three methods of getting user data  from a view to a controller.
 
 ## Getting User Data in Flask -Part 2
 
-
+## Using AJAX to send data to flask
+- Data requests are either synchronous or async (asynchronous)
+- Async data requests are requests that get sent to the server and back to the client without a page refresh.
+- Async requests (AJAX requests) use one of two methods:
+  1. XMLHttpRequest
+  2. Fetch (modern way)

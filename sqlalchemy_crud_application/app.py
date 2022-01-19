@@ -1,6 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from distutils.log import error
+from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
 from flask_sqlalchemy import SQLAlchemy
 from helpers import sqlalchemy_config
+import sys
+from typing import Dict
 params = sqlalchemy_config(filename="./database.ini")
 print(params)
 app = Flask(__name__)
@@ -19,19 +22,38 @@ class Todo(db.Model):
     def __repr__(self):
         return f"<Todo {self.id}: {self.description}>"
 
+
 db.create_all()
+
 
 @app.post('/todos/create')
 def create_todo():
-    description = request.form.get('description', '')
-    todo = Todo(description=description.strip())
-    db.session.add(todo)
-    if ''.__eq__(description.strip()):
+    is_error = False
+    body: Dict[str, str] = dict()
+    try:
+        description: str = request.get_json()['description'].strip()
+        print(f"description is: {description}")
+        todo: Todo = Todo(description2=description)
+        db.session.add(todo)
+        if not description:
+            db.session.delete(todo)
+            db.session.rollback()
+        else:
+            db.session.commit()
+            body['description'] = todo.description
+    except:
+        is_error = True
         db.session.rollback()
-    else:
-        db.session.commit()
-    return redirect(url_for('index'))
+        print(sys.exc_info())
+    finally:
+        db.session.close()
     
+    if is_error:
+        abort(400)
+    else:
+        return jsonify(body)
+    
+
 
 @app.route('/')
 def index():
