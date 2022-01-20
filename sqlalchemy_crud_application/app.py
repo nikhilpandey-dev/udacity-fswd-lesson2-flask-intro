@@ -15,6 +15,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = sqlalchemy_config(
 db = SQLAlchemy(app)
 
 
+migrate = Migrate(app, db)
+
 class Todo(db.Model):
     __tablename__ = 'todos'
     id: int = db.Column(db.Integer, primary_key=True)
@@ -24,7 +26,7 @@ class Todo(db.Model):
         return f"<Todo {self.id}: {self.description}>"
 
 
-db.create_all()
+# db.create_all()
 
 
 @app.post('/todos/create')
