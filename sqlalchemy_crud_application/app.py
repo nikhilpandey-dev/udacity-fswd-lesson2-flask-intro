@@ -1,6 +1,7 @@
 from distutils.log import error
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from helpers import sqlalchemy_config
 import sys
 from typing import Dict

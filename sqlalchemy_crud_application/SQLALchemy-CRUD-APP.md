@@ -1,3 +1,27 @@
+- [Lesson 5: Building a  CRUD Application with SQLAlchemy](#lesson-5-building-a--crud-application-with-sqlalchemy)
+  - [Model View Controller](#model-view-controller)
+    - [layers](#layers)
+    - [MVC In Nutshell](#mvc-in-nutshell)
+    - [MVC Diagram](#mvc-diagram)
+  - [Handling User input](#handling-user-input)
+  - [Getting User Data in Flask - part 1](#getting-user-data-in-flask---part-1)
+    - [URL query parameter](#url-query-parameter)
+    - [Form data](#form-data)
+    - [Note defaults](#note-defaults)
+    - [JSON](#json)
+    - [Getting HTML form submission to get the data](#getting-html-form-submission-to-get-the-data)
+    - [Form methods `POST` vs `GET`](#form-methods-post-vs-get)
+      - [The POST submission](#the-post-submission)
+      - [The GET submission](#the-get-submission)
+  - [Getting User Data in Flask -Part 2](#getting-user-data-in-flask--part-2)
+  - [Using AJAX to send data to flask](#using-ajax-to-send-data-to-flask)
+- [Lesson 6: Migrations](#lesson-6-migrations)
+  - [Introduction (Migrations Part 1)](#introduction-migrations-part-1)
+    - [Upgrades and rollback](#upgrades-and-rollback)
+  - [Migrations - Part 2](#migrations---part-2)
+    - [Migrations command line scripts](#migrations-command-line-scripts)
+    - [Steps to get migrations going](#steps-to-get-migrations-going)
+***
 # Lesson 5: Building a  CRUD Application with SQLAlchemy
 ![CRUD to Database Mapping](./images/crud_db_sqlalchemy_mapping.png)
 <center>CRUD to Database to SQLAchemy Mapping</center>
@@ -77,3 +101,46 @@ There are three methods of getting user data  from a view to a controller.
 - Async requests (AJAX requests) use one of two methods:
   1. XMLHttpRequest
   2. Fetch (modern way)
+***
+
+# Lesson 6: Migrations
+
+## Introduction (Migrations Part 1)
+- Migrations deal with how we manage modifications to our data schema, over time.
+- Mistakes to our database schema are very expensive to make. The entire app can go down, so we want to
+  - quickly roll back changes, and 
+  - test changes before we make them
+- A migration is a file that keeps track of changes to our database schema(structure of our database)
+  - Offers version controls our schema
+
+### Upgrades and rollback
+- Migrations stack together in order to form the latest version of our database schema
+- We can upgrade our database schema by applying migrations
+- We can roll back our database schema to a former version by reverting migrations that we applied.
+
+> Doing a `git commit` for a Git version control system on files is similar to `applying a migration (a schema upgrade)` for a version control system (using migrations) on our data schema.
+
+## Migrations - Part 2
+
+Migrations
+- encapsulate a set of changes to our database schema, made over time.
+- are uniquely named
+- are uniquely stored as *local files* in our project repo, e.g., a `migrations/` folder
+- There should be a 1 - 1 mapping between the changes made to our database, and the *migration files* that exist in our migrations/folder.
+- Our migrations file set up the tables for our database.
+- All changes made to our db should exist physically as part of migration file in our repository.
+
+### Migrations command line scripts
+
+There are generally 3 scripts needed, for
+- **migrate**: creating a migration script template to fill out; generating a migrations file based on changes to be made
+- **upgrade**: applying migrations that hadb't been applied yet ("upgrading" our database)
+- **downgrade**: rolling back applied migrations that were problematic ("downgrading" our database)
+
+### Steps to get migrations going
+1. Initiliaze the migration repository structure for storing migrations
+2. Create a migration script (using Flask-Migrate)
+3. (Manually) Run the migration script (using Flask-Script)
+
+
+
